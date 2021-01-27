@@ -1,15 +1,13 @@
-import glob
-import re
-
 import os.path as osp
 import pandas as pd
 
 from .bases import BaseImageDataset
 
-class GroceriesDataset():
+
+class GroceriesDataset(BaseImageDataset):
     dataset_dir = 'groceries_dataset'
 
-    def __init__(self, root='/media/svakhreev/fast/rimma_work/detection_pet_project/detection_items_on_shelves/data', verbose=True, **kwargs):
+    def __init__(self, root, verbose=True, **kwargs):
         super(GroceriesDataset, self).__init__()
         self.dataset_dir = osp.join(root, self.dataset_dir)
         self.train_dir = osp.join(self.dataset_dir, 'train')
@@ -18,9 +16,9 @@ class GroceriesDataset():
 
         self._check_before_run()
 
-        train = self._process_dir(self.train_dir, relabel=True)
-        query = self._process_dir(self.query_dir, relabel=False)
-        gallery = self._process_dir(self.gallery_dir, relabel=False)
+        train = self._process_dir(self.train_dir)
+        query = self._process_dir(self.query_dir)
+        gallery = self._process_dir(self.gallery_dir)
 
         if verbose:
             print('=> GroceriesDataset loaded')
@@ -35,7 +33,6 @@ class GroceriesDataset():
         self.num_gallery_pids, self.num_gallery_imgs, self.num_gallery_cams = self.get_imagedata_info(self.gallery)
 
     def _check_before_run(self):
-        """Check if all files are available before going deeper"""
         if not osp.exists(self.dataset_dir):
             raise RuntimeError("'{}' is not available".format(self.dataset_dir))
         if not osp.exists(self.train_dir):
@@ -45,11 +42,9 @@ class GroceriesDataset():
         if not osp.exists(self.gallery_dir):
             raise RuntimeError("'{}' is not available".format(self.gallery_dir))
 
-    def _process_dir(self, train_df, relabel=False):
-        train_df = pd.read_csv('/media/svakhreev/fast/rimma_work/detection_pet_project/detection_items_on_shelves/data/groceries_dataset/train.csv')
+    def _process_dir(self, dir_path):
+        train_df = pd.read_csv(osp.join(self.dataset_dir, 'train.csv'))
         dataset = []
-        camid = -1
         for index, row in train_df.iterrows():
-            dataset.append((row['name'], row['class'], camid))
-
+            dataset.append((osp.join(dir_path, row['name']), row['class'], -1))
         return dataset

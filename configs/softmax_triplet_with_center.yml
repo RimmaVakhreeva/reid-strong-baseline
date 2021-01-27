@@ -1,22 +1,19 @@
 MODEL:
   PRETRAIN_CHOICE: 'imagenet'
-  PRETRAIN_PATH: '/home/haoluo/.torch/models/resnet50-19c8e357.pth'
   METRIC_LOSS_TYPE: 'triplet_center'
   IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'yes'
 
-
-
-
 INPUT:
-  SIZE_TRAIN: [256, 128]
-  SIZE_TEST: [256, 128]
+  SIZE_TRAIN: [128, 128]
+  SIZE_TEST: [128, 128]
   PROB: 0.5 # random horizontal flip
   RE_PROB: 0.5 # random erasing
   PADDING: 10
 
 DATASETS:
-  NAMES: ('market1501')
+  NAMES: ('groceries_dataset')
+  ROOT_DIR: /media/svakhreev/fast/rimma_work/detection_pet_project/detection_items_on_shelves/data
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
