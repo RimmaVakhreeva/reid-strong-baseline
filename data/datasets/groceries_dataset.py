@@ -9,7 +9,7 @@ from .bases import BaseImageDataset
 class GroceriesDataset():
     dataset_dir = 'groceries_dataset'
 
-    def __init__(self, root='/media/svakhreev/fast/rimma_work/detection_pet_project', verbose=True, **kwargs):
+    def __init__(self, root='/media/svakhreev/fast/rimma_work/detection_pet_project/data', verbose=True, **kwargs):
         super(GroceriesDataset, self).__init__()
         self.dataset_dir = osp.join(root, self.dataset_dir)
         self.train_dir = osp.join(self.dataset_dir, 'train')
@@ -46,7 +46,7 @@ class GroceriesDataset():
             raise RuntimeError("'{}' is not available".format(self.gallery_dir))
 
     def _process_dir(self, train_df, relabel=False):
-        train_df = pd.read_csv('/media/svakhreev/fast/rimma_work/detection_pet_project/groceries_dataset/train.csv')
+        train_df = pd.read_csv('/media/svakhreev/fast/rimma_work/detection_pet_project/data/groceries_dataset/train.csv')
         dataset = []
         camid = -1
         for index, row in train_df.iterrows():
