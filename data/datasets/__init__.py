@@ -9,6 +9,7 @@ from .market1501 import Market1501
 from .msmt17 import MSMT17
 from .veri import VeRi
 from .groceries_dataset import GroceriesDataset
+from .aliproducts_dataset import AliproductsDataset
 from .dataset_loader import ImageDataset
 
 __factory = {
@@ -17,7 +18,8 @@ __factory = {
     'dukemtmc': DukeMTMCreID,
     'msmt17': MSMT17,
     'veri': VeRi,
-    'groceries_dataset': GroceriesDataset
+    'groceries_dataset': GroceriesDataset,
+    'aliproducts_dataset': AliproductsDataset
 }
 
 
