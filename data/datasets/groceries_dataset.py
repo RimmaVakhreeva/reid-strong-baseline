@@ -16,9 +16,9 @@ class GroceriesDataset(BaseImageDataset):
 
         self._check_before_run()
 
-        train = self._process_dir(self.train_dir)
-        query = self._process_dir(self.query_dir)
-        gallery = self._process_dir(self.gallery_dir)
+        train = self._process_dir(self.train_dir, 'train.csv')
+        query = self._process_dir(self.query_dir, 'query.csv')
+        gallery = self._process_dir(self.gallery_dir, 'gallery.csv')
 
         if verbose:
             print('=> GroceriesDataset loaded')
@@ -42,8 +42,8 @@ class GroceriesDataset(BaseImageDataset):
         if not osp.exists(self.gallery_dir):
             raise RuntimeError("'{}' is not available".format(self.gallery_dir))
 
-    def _process_dir(self, dir_path):
-        train_df = pd.read_csv(osp.join(self.dataset_dir, 'train.csv'))
+    def _process_dir(self, dir_path, csv_path):
+        train_df = pd.read_csv(osp.join(self.dataset_dir, csv_path))
         dataset = []
         for index, row in train_df.iterrows():
             dataset.append((osp.join(dir_path, row['name']), row['class'], -1))

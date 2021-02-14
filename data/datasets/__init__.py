@@ -19,7 +19,7 @@ __factory = {
     'msmt17': MSMT17,
     'veri': VeRi,
     'groceries_dataset': GroceriesDataset,
-    'aliproducts_dataset': AliproductsDataset
+    'Aliproducts_dataset': AliproductsDataset
 }
 
 

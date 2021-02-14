@@ -13,8 +13,8 @@ INPUT:
   PADDING: 10
 
 DATASETS:
-  NAMES: ('groceries_dataset')
-  ROOT_DIR: /media/svakhreev/fast/rimma_work/detection_pet_project/detection_items_on_shelves/data
+  NAMES: ('Aliproducts_dataset')
+  ROOT_DIR: /media/svakhreev/fast/rimma_work/detection_pet_project/
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'

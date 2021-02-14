@@ -6,7 +6,7 @@ from .bases import BaseImageDataset
 
 
 class AliproductsDataset(BaseImageDataset):
-    dataset_dir = 'aliproducts_dataset'
+    dataset_dir = 'Aliproducts_dataset'
 
     def __init__(self, root, verbose=True, **kwargs):
         super(AliproductsDataset, self).__init__()
@@ -17,9 +17,9 @@ class AliproductsDataset(BaseImageDataset):
 
         self._check_before_run()
 
-        train = self._process_dir(self.train_dir)
-        query = self._process_dir(self.query_dir)
-        gallery = self._process_dir(self.gallery_dir)
+        train = self._process_dir(self.train_dir, 'train.json')
+        query = self._process_dir(self.query_dir, 'query.json')
+        gallery = self._process_dir(self.gallery_dir, 'gallery.json')
 
         if verbose:
             print('=> AliproductsDataset loaded')
@@ -43,10 +43,10 @@ class AliproductsDataset(BaseImageDataset):
         if not osp.exists(self.gallery_dir):
             raise RuntimeError("'{}' is not available".format(self.gallery_dir))
 
-    def _process_dir(self, dir_path):
-        with open(osp.join(self.dataset_dir, 'train.json'), 'r') as read_file:
-            train_data = json.load(read_file)
-        ali_dataset = []
-        for img in tqdm.tqdm(train_data['images']):
-            ali_dataset.append((osp.join(dir_path, img['image_id']), img['class_id'], -1))
-        return ali_dataset
+    def _process_dir(self, dir_path, json_path):
+        with open(osp.join(self.dataset_dir, json_path), 'r') as read_file:
+            data = json.load(read_file)
+        dataset = []
+        for img in tqdm.tqdm(data['images']):
+            dataset.append((osp.join(dir_path, img['image_id']), img['class_id'], -1))
+        return dataset
