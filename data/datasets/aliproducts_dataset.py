@@ -11,7 +11,7 @@ class AliproductsDataset(BaseImageDataset):
     def __init__(self, root, verbose=True, **kwargs):
         super(AliproductsDataset, self).__init__()
         self.dataset_dir = osp.join(root, self.dataset_dir)
-        self.train_dir = osp.join(self.dataset_dir, 'train')
+        self.train_dir = osp.join(self.dataset_dir, 'train/')
         self.query_dir = osp.join(self.dataset_dir, 'query')
         self.gallery_dir = osp.join(self.dataset_dir, 'gallery')
 
@@ -48,5 +48,5 @@ class AliproductsDataset(BaseImageDataset):
             data = json.load(read_file)
         dataset = []
         for img in tqdm.tqdm(data['images']):
-            dataset.append((osp.join(dir_path, img['image_id']), img['class_id'], -1))
+            dataset.append((osp.join(dir_path, img['class_id'], img['image_id']), -1))
         return dataset
