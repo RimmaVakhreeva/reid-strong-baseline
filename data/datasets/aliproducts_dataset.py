@@ -48,5 +48,5 @@ class AliproductsDataset(BaseImageDataset):
             data = json.load(read_file)
         dataset = []
         for img in tqdm.tqdm(data['images']):
-            dataset.append((osp.join(dir_path, img['class_id'], img['image_id']), -1))
+            dataset.append((osp.join(dir_path, img['image_id']), img['class_id'], -1))
         return dataset
