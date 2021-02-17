@@ -50,5 +50,5 @@ class AliproductsDataset(BaseImageDataset):
         for img in tqdm.tqdm(data['images']):
             img_filepath = osp.join(dir_path, img['class_id'], img['image_id'])
             #assert osp.exists(img_filepath), f'Invalid path: {img_filepath}'
-            dataset.append((img_filepath, img['class_id'], -1))
+            dataset.append((img_filepath, int(img['class_id']), -1))
         return dataset
